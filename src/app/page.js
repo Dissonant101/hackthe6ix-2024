@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { BlocklyWorkspace } from 'react-blockly';
+import { useRef, useEffect } from 'react';
+import { useBlocklyWorkspace } from 'react-blockly';
 import * as Blockly from 'blockly/core';
+import { HtmlGenerator } from '../../blockly/html_generators';
 
 var htmlBlocks = [
   {
@@ -704,91 +705,91 @@ var htmlBlocks = [
     helpUrl: 'http://www.w3schools.com/tags/tag_html.asp',
   },
   {
-    type: "frontend-start",
+    type: 'frontend-start',
     message0: 'frontend-start',
-    tooltip: "",
-    helpUrl: "",
+    tooltip: '',
+    helpUrl: '',
     nextStatement: 'html',
-    colour: 225
+    colour: 225,
   },
   {
-    type: "backend-start",
+    type: 'backend-start',
     message0: 'backend-start',
-    tooltip: "",
-    helpUrl: "",
+    tooltip: '',
+    helpUrl: '',
     nextStatement: 'html',
-    colour: 225
+    colour: 225,
   },
   {
-    type: "add-to-db",
-    tooltip: "",
-    helpUrl: "",
-    message0: "add-to-db %1",
+    type: 'add-to-db',
+    tooltip: '',
+    helpUrl: '',
+    message0: 'add-to-db %1',
     args0: [
       {
-        "type": "input_value",
-        "name": "data",
-        "align": "CENTRE",
-        "check": "String"
-      }
+        type: 'input_value',
+        name: 'data',
+        align: 'CENTRE',
+        check: 'String',
+      },
     ],
     previousStatement: null,
     nextStatement: null,
     colour: 225,
-    inputsInline: true
+    inputsInline: true,
   },
   {
-    type: "delete-from-db",
-    tooltip: "",
-    helpUrl: "",
-    message0: "delete-from-db %1",
+    type: 'delete-from-db',
+    tooltip: '',
+    helpUrl: '',
+    message0: 'delete-from-db %1',
     args0: [
       {
-        "type": "input_value",
-        "name": "data",
-        "align": "CENTRE",
-        "check": "String"
-      }
+        type: 'input_value',
+        name: 'data',
+        align: 'CENTRE',
+        check: 'String',
+      },
     ],
     previousStatement: null,
     nextStatement: null,
     colour: 225,
-    inputsInline: true
+    inputsInline: true,
   },
   {
-    type: "create-db",
-    tooltip: "",
-    helpUrl: "",
-    message0: "create-db %1",
+    type: 'create-db',
+    tooltip: '',
+    helpUrl: '',
+    message0: 'create-db %1',
     args0: [
       {
-        "type": "input_value",
-        "name": "data",
-        "align": "CENTRE",
-        "check": "String"
-      }
+        type: 'input_value',
+        name: 'data',
+        align: 'CENTRE',
+        check: 'String',
+      },
     ],
     previousStatement: null,
     nextStatement: null,
     colour: 225,
-    inputsInline: true
+    inputsInline: true,
   },
   {
-    type: "read-db",
-    tooltip: "",
-    helpUrl: "",
-    message0: "read-db %1",
+    type: 'read-db',
+    tooltip: '',
+    helpUrl: '',
+    message0: 'read-db %1',
     args0: [
       {
-        "type": "input_value",
-        "name": "data",
-        "align": "CENTRE",
-        "check": "String"
-      }
+        type: 'input_value',
+        name: 'data',
+        align: 'CENTRE',
+        check: 'String',
+      },
     ],
     output: null,
     colour: 225,
-    inputsInline: true
+    inputsInline: true,
   },
   {
     type: 'table',
@@ -993,116 +994,53 @@ var htmlBlocks = [
 Blockly.defineBlocksWithJsonArray(htmlBlocks);
 
 export default function Home() {
-  const [xml, setXml] = useState();
-
-  useEffect(() => {
-    console.log(xml)
-  }, [xml])
-  
-  return (
-    <div className="w-screen h-screen">
-      
-      <BlocklyWorkspace
-        className="w-full h-full text-black"
-        toolboxConfiguration={{
-          kind: 'categoryToolbox',
+  const blocklyRef = useRef(null);
+  const { workspace, xml } = useBlocklyWorkspace({
+    ref: blocklyRef,
+    toolboxConfiguration: {
+      kind: 'categoryToolbox',
+      contents: [
+        {
+          kind: 'category',
+          name: 'HTML',
+          colour: 230,
+          contents: [
+            { kind: 'block', type: 'table' },
+            { kind: 'block', type: 'form' },
+          ],
+        },
+        {
+          kind: 'category',
+          name: 'Backend',
+          colour: 120,
           contents: [
             {
-              kind: 'category',
-              name: 'HTML',
-              colour: 230,
-              contents: [
-                { kind: 'block', type: 'frontend-start'},
-                { kind: 'block', type: 'html' },
-                { kind: 'block', type: 'body' },
-                { kind: 'block', type: 'head' },
-                { kind: 'block', type: 'title' },
-                { kind: 'block', type: 'paragraph' },
-                { kind: 'block', type: 'plaintext' },
-                { kind: 'block', type: 'table' },
-                { kind: 'block', type: 'form' },
-                { kind: 'block', type: 'input_text' },
-                { kind: 'block', type: 'button' },
-                { kind: 'block', type: 'unorderedlist' },
-                { kind: 'block', type: 'orderedlist' },
-                { kind: 'block', type: 'listelement' },
-                
-              ],
+              kind: 'block',
+              type: 'text',
             },
             {
-              kind: 'category',
-              name: 'Backend',
-              colour: 120,
-              contents: [
-                { kind: 'block', type: 'backend-start'},
-                { kind: 'block', type: 'add-to-db'},
-                { kind: 'block', type: 'delete-from-db'},
-                { kind: 'block', type: 'create-db'},
-                { kind: 'block', type: 'read-db'}
-              ],
+              kind: 'block',
+              type: 'logic_compare',
             },
             {
-              kind: 'category',
-              name: 'Loops',
-              categorystyle: 'loop_category',
-              contents: [
-                {
-                  kind: 'block',
-                  type: 'controls_repeat_ext',
-                  inputs: {
-                    TIMES: {
-                      shadow: {
-                        type: 'math_number',
-                        fields: {
-                          NUM: 10,
-                        },
-                      },
-                    },
-                  },
-                },
-                {
-                  kind: 'block',
-                  type: 'controls_whileUntil',
-                },
-                {
-                  kind: 'block',
-                  type: 'controls_for',
-                  inputs: {
-                    FROM: {
-                      shadow: {
-                        type: 'math_number',
-                        fields: {
-                          NUM: 1,
-                        },
-                      },
-                    },
-                    TO: {
-                      shadow: {
-                        type: 'math_number',
-                        fields: {
-                          NUM: 10,
-                        },
-                      },
-                    },
-                    BY: {
-                      shadow: {
-                        type: 'math_number',
-                        fields: {
-                          NUM: 1,
-                        },
-                      },
-                    },
-                  },
-                },
-                {
-                  kind: 'block',
-                  type: 'controls_forEach',
-                },
-                {
-                  kind: 'block',
-                  type: 'controls_flow_statements',
-                },
-              ],
+              kind: 'block',
+              type: 'logic_operation',
+            },
+            {
+              kind: 'block',
+              type: 'logic_negate',
+            },
+            {
+              kind: 'block',
+              type: 'logic_boolean',
+            },
+            {
+              kind: 'block',
+              type: 'logic_null',
+            },
+            {
+              kind: 'block',
+              type: 'logic_ternary',
             },
             {
               kind: 'category',
@@ -1425,13 +1363,15 @@ export default function Home() {
               custom: 'PROCEDURE',
             },
           ],
-        }}
-        initialXml={xml}
-        onXmlChange={setXml}
-      />
-      
-    </div>
-  );
+        },
+      ],
+    },
+    initialXml: "<xml xmlns='http://www.w3.org/1999/xhtml'></xml>",
+    onWorkspaceChange: (workspace) => {
+      const code = HtmlGenerator.workspaceToCode(workspace);
+      console.log(code);
+    },
+  });
+
+  return <div ref={blocklyRef} className="w-screen h-screen" />;
 }
-
-
