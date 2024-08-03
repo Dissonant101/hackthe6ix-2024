@@ -20,38 +20,38 @@ HtmlGenerator.scrub_ = function (block, code) {
 
 function removeIndentAndTrailingNewline() {}
 
-HtmlGenerator['frontend-start'] = function (block) {
+HtmlGenerator.forBlock['frontend-start'] = function (block) {
   // var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = 'frontend!';
   return code;
 };
-HtmlGenerator['backend-start'] = function (block) {
+HtmlGenerator.forBlock['backend-start'] = function (block) {
   // var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = 'backend!';
   return code;
 };
-HtmlGenerator['add-to-db'] = function (block) {
+HtmlGenerator.forBlock['add-to-db'] = function (block) {
   // var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = 'db!';
   return code;
 };
-HtmlGenerator['delete-from-db'] = function (block) {
+HtmlGenerator.forBlock['delete-from-db'] = function (block) {
   // var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = 'db!';
   return code;
 };
-HtmlGenerator['create-db'] = function (block) {
+HtmlGenerator.forBlock['create-db'] = function (block) {
   // var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = 'db!';
   return code;
 };
-HtmlGenerator['read-db'] = function (block) {
+HtmlGenerator.forBlock['read-db'] = function (block) {
   // var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = 'db!';
   return code;
 };
 
-HtmlGenerator['baseframe'] = function (block) {
+HtmlGenerator.forBlock['baseframe'] = function (block) {
   var statements_head = HtmlGenerator.statementToCode(block, 'head');
   var statements_body = HtmlGenerator.statementToCode(block, 'body');
 
@@ -65,26 +65,26 @@ HtmlGenerator['baseframe'] = function (block) {
   return code;
 };
 
-HtmlGenerator['html'] = function (block) {
+HtmlGenerator.forBlock['html'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<!DOCTYPE HTML>\n<html>\n' + statements_content + '</html>\n';
   return code;
 };
 
-HtmlGenerator['body'] = function (block) {
+HtmlGenerator.forBlock['body'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<body>\n' + statements_content + '</body>\n';
   return code;
 };
 
-HtmlGenerator['head'] = function (block) {
+HtmlGenerator.forBlock['head'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code =
     '<head>\n  <meta charset="utf-8">\n' + statements_content + '</head>\n';
   return code;
 };
 
-HtmlGenerator['title'] = function (block) {
+HtmlGenerator.forBlock['title'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
 
   if (statements_content != '')
@@ -95,19 +95,19 @@ HtmlGenerator['title'] = function (block) {
   return code;
 };
 
-HtmlGenerator['paragraph'] = function (block) {
+HtmlGenerator.forBlock['paragraph'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<p>\n' + statements_content + '</p>\n';
   return code;
 };
 
-HtmlGenerator['plaintext'] = function (block) {
+HtmlGenerator.forBlock['plaintext'] = function (block) {
   var text_content = block.getFieldValue('content');
   var code = text_content + '\n';
   return code;
 };
 
-HtmlGenerator['division'] = function (block) {
+HtmlGenerator.forBlock['division'] = function (block) {
   var value_name = HtmlGenerator.valueToCode(
     block,
     'NAME',
@@ -118,32 +118,32 @@ HtmlGenerator['division'] = function (block) {
   return code;
 };
 
-HtmlGenerator['style'] = function (block) {
+HtmlGenerator.forBlock['style'] = function (block) {
   var statements_name = HtmlGenerator.statementToCode(block, 'NAME');
   var code = ' style="' + statements_name.trim() + '"';
   return [code, HtmlGenerator.ORDER_NONE];
 };
 
-HtmlGenerator['color'] = function (block) {
+HtmlGenerator.forBlock['color'] = function (block) {
   var colour_name = block.getFieldValue('NAME');
   var code = 'color: ' + colour_name + ';';
   return code;
 };
 
-HtmlGenerator['bgcolour'] = function (block) {
+HtmlGenerator.forBlock['bgcolour'] = function (block) {
   var colour_name = block.getFieldValue('NAME');
   var code = 'background-color: ' + colour_name + ';';
   return code;
 };
 
-HtmlGenerator['genericstyle'] = function (block) {
+HtmlGenerator.forBlock['genericstyle'] = function (block) {
   var text_property = block.getFieldValue('property');
   var text_value = block.getFieldValue('value');
   var code = text_property + ': ' + text_value + ';';
   return code;
 };
 
-HtmlGenerator['generictag'] = function (block) {
+HtmlGenerator.forBlock['generictag'] = function (block) {
   var text_name = block.getFieldValue('NAME');
   var value_name = HtmlGenerator.valueToCode(
     block,
@@ -163,7 +163,7 @@ HtmlGenerator['generictag'] = function (block) {
   return code;
 };
 
-HtmlGenerator['more_attributes'] = function (block) {
+HtmlGenerator.forBlock['more_attributes'] = function (block) {
   var value_name1 = HtmlGenerator.valueToCode(
     block,
     'NAME1',
@@ -183,14 +183,14 @@ HtmlGenerator['more_attributes'] = function (block) {
   return [code, HtmlGenerator.ORDER_NONE];
 };
 
-HtmlGenerator['genericattribute'] = function (block) {
+HtmlGenerator.forBlock['genericattribute'] = function (block) {
   var text_attribute = block.getFieldValue('attribute');
   var text_value = block.getFieldValue('value');
   var code = ' ' + text_attribute + '="' + text_value + '"';
   return [code, HtmlGenerator.ORDER_NONE];
 };
 
-HtmlGenerator['link'] = function (block) {
+HtmlGenerator.forBlock['link'] = function (block) {
   var text_name = block.getFieldValue('NAME');
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code =
@@ -198,7 +198,7 @@ HtmlGenerator['link'] = function (block) {
   return code;
 };
 
-HtmlGenerator['span'] = function (block) {
+HtmlGenerator.forBlock['span'] = function (block) {
   var value_name = HtmlGenerator.valueToCode(
     block,
     'NAME',
@@ -210,26 +210,26 @@ HtmlGenerator['span'] = function (block) {
   return code;
 };
 
-HtmlGenerator['image'] = function (block) {
+HtmlGenerator.forBlock['image'] = function (block) {
   var text_image = block.getFieldValue('IMAGE');
   var text_alt = block.getFieldValue('ALT');
   var code = '<img src="' + text_image + '" alt="' + text_alt + '">\n';
   return code;
 };
 
-HtmlGenerator['emphasise'] = function (block) {
+HtmlGenerator.forBlock['emphasise'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<em>' + statements_content.trim() + '</em>\n';
   return code;
 };
 
-HtmlGenerator['strong'] = function (block) {
+HtmlGenerator.forBlock['strong'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<strong>' + statements_content.trim() + '</strong>\n';
   return code;
 };
 
-HtmlGenerator['headline'] = function (block) {
+HtmlGenerator.forBlock['headline'] = function (block) {
   var dropdown_name = block.getFieldValue('NAME');
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code =
@@ -243,131 +243,131 @@ HtmlGenerator['headline'] = function (block) {
   return code;
 };
 
-HtmlGenerator['linebreak'] = function (block) {
+HtmlGenerator.forBlock['linebreak'] = function (block) {
   var code = '<br>\n';
   return code;
 };
 
-HtmlGenerator['horizontalbreak'] = function (block) {
+HtmlGenerator.forBlock['horizontalbreak'] = function (block) {
   var code = '<hr>\n';
   return code;
 };
 
-HtmlGenerator['unorderedlist'] = function (block) {
+HtmlGenerator.forBlock['unorderedlist'] = function (block) {
   var statements_name = HtmlGenerator.statementToCode(block, 'NAME');
   var code = '<ul>\n' + statements_name + '</ul>\n';
   return code;
 };
 
-HtmlGenerator['orderedlist'] = function (block) {
+HtmlGenerator.forBlock['orderedlist'] = function (block) {
   var statements_name = HtmlGenerator.statementToCode(block, 'NAME');
   var code = '<ol>\n' + statements_name + '</ol>\n';
   return code;
 };
 
-HtmlGenerator['listelement'] = function (block) {
+HtmlGenerator.forBlock['listelement'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<li>' + statements_content + '</li>\n';
   return code;
 };
 
-HtmlGenerator['inserted'] = function (block) {
+HtmlGenerator.forBlock['inserted'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<ins>' + statements_content.trim() + '</ins>\n';
   return code;
 };
 
-HtmlGenerator['deleted'] = function (block) {
+HtmlGenerator.forBlock['deleted'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<del>' + statements_content.trim() + '</del>\n';
   return code;
 };
 
-HtmlGenerator['super'] = function (block) {
+HtmlGenerator.forBlock['super'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<sup>' + statements_content.trim() + '</sup>\n';
   return code;
 };
 
-HtmlGenerator['sub'] = function (block) {
+HtmlGenerator.forBlock['sub'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<sub>' + statements_content.trim() + '</sub>\n';
   return code;
 };
 
-HtmlGenerator['code'] = function (block) {
+HtmlGenerator.forBlock['code'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<code>\n' + statements_content + '</code>\n';
   return code;
 };
 
-HtmlGenerator['quote'] = function (block) {
+HtmlGenerator.forBlock['quote'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<q>' + statements_content.trim() + '</q>\n';
   return code;
 };
 
-HtmlGenerator['blockquote'] = function (block) {
+HtmlGenerator.forBlock['blockquote'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<blockquote>\n' + statements_content + '</blockquote>\n';
   return code;
 };
 
-HtmlGenerator['sample'] = function (block) {
+HtmlGenerator.forBlock['sample'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<samp>\n' + statements_content + '</samp>\n';
   return code;
 };
 
-HtmlGenerator['keyboard'] = function (block) {
+HtmlGenerator.forBlock['keyboard'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<kbd>\n' + statements_content + '</kbd>\n';
   return code;
 };
 
-HtmlGenerator['variable'] = function (block) {
+HtmlGenerator.forBlock['variable'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<var>' + statements_content.trim() + '</var>\n';
   return code;
 };
 
-HtmlGenerator['form'] = function (block) {
+HtmlGenerator.forBlock['form'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<form>\n' + statements_content + '</form>\n';
   return code;
 };
 
-HtmlGenerator['table'] = function (block) {
+HtmlGenerator.forBlock['table'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<table>\n' + statements_content + '</table>\n';
   return code;
 };
 
-HtmlGenerator['tablerow'] = function (block) {
+HtmlGenerator.forBlock['tablerow'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<tr>\n' + statements_content + '</tr>\n';
   return code;
 };
 
-HtmlGenerator['tablecell'] = function (block) {
+HtmlGenerator.forBlock['tablecell'] = function (block) {
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
   var code = '<td>' + statements_content.trim() + '</td>\n';
   return code;
 };
 
-HtmlGenerator['input_text'] = function (block) {
+HtmlGenerator.forBlock['input_text'] = function (block) {
   var text_default = block.getFieldValue('default');
   var code = '<input value="' + text_default + '">\n';
   return code;
 };
 
-HtmlGenerator['button'] = function (block) {
+HtmlGenerator.forBlock['button'] = function (block) {
   var statements_name = HtmlGenerator.statementToCode(block, 'NAME');
   var code = '<button>' + statements_name.trim() + '</button>\n';
   return code;
 };
 
-HtmlGenerator['input'] = function (block) {
+HtmlGenerator.forBlock['input'] = function (block) {
   var dropdown_type = block.getFieldValue('type');
   var text_value = block.getFieldValue('value');
   var value_text = HtmlGenerator.valueToCode(
@@ -386,19 +386,19 @@ HtmlGenerator['input'] = function (block) {
   return code;
 };
 
-HtmlGenerator['script'] = function (block) {
+HtmlGenerator.forBlock['script'] = function (block) {
   var statements_content = Blockly.JavaScript.statementToCode(block, 'content');
   var code = '<script>\n' + statements_content + '</script>\n';
   return code;
 };
 
-HtmlGenerator['onclick'] = function (block) {
+HtmlGenerator.forBlock['onclick'] = function (block) {
   var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
   var code = ' onclick="' + statements_name.trim() + '"';
   return [code, HtmlGenerator.ORDER_NONE];
 };
 
-HtmlGenerator['body_attributes'] = function (block) {
+HtmlGenerator.forBlock['body_attributes'] = function (block) {
   var value_name = HtmlGenerator.valueToCode(
     block,
     'NAME',

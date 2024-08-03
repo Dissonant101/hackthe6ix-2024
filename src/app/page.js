@@ -1005,15 +1005,52 @@ export default function Home() {
           name: 'HTML',
           colour: 230,
           contents: [
-            { kind: 'block', type: 'table' },
-            { kind: 'block', type: 'form' },
-            { kind: 'block', type: 'frontend-start'},
+            { kind: 'block', type: 'baseframe' },
             { kind: 'block', type: 'html' },
             { kind: 'block', type: 'body' },
             { kind: 'block', type: 'head' },
             { kind: 'block', type: 'title' },
             { kind: 'block', type: 'paragraph' },
             { kind: 'block', type: 'plaintext' },
+            { kind: 'block', type: 'division' },
+            { kind: 'block', type: 'style' },
+            { kind: 'block', type: 'color' },
+            { kind: 'block', type: 'bgcolour' },
+            { kind: 'block', type: 'genericstyle' },
+            { kind: 'block', type: 'generictag' },
+            { kind: 'block', type: 'more_attributes' },
+            { kind: 'block', type: 'genericattribute' },
+            { kind: 'block', type: 'link' },
+            { kind: 'block', type: 'span' },
+            { kind: 'block', type: 'image' },
+            { kind: 'block', type: 'emphasise' },
+            { kind: 'block', type: 'strong' },
+            { kind: 'block', type: 'headline' },
+            { kind: 'block', type: 'linebreak' },
+            { kind: 'block', type: 'horizontalbreak' },
+            { kind: 'block', type: 'unorderedlist' },
+            { kind: 'block', type: 'orderedlist' },
+            { kind: 'block', type: 'listelement' },
+            { kind: 'block', type: 'inserted' },
+            { kind: 'block', type: 'deleted' },
+            { kind: 'block', type: 'super' },
+            { kind: 'block', type: 'sub' },
+            { kind: 'block', type: 'code' },
+            { kind: 'block', type: 'quote' },
+            { kind: 'block', type: 'blockquote' },
+            { kind: 'block', type: 'sample' },
+            { kind: 'block', type: 'keyboard' },
+            { kind: 'block', type: 'variable' },
+            { kind: 'block', type: 'form' },
+            { kind: 'block', type: 'table' },
+            { kind: 'block', type: 'tablerow' },
+            { kind: 'block', type: 'tablecell' },
+            { kind: 'block', type: 'input_text' },
+            { kind: 'block', type: 'button' },
+            { kind: 'block', type: 'input' },
+            { kind: 'block', type: 'script' },
+            { kind: 'block', type: 'onclick' },
+            { kind: 'block', type: 'body_attributes' },
           ],
         },
         {
@@ -1021,11 +1058,11 @@ export default function Home() {
           name: 'Backend',
           colour: 120,
           contents: [
-            { kind: 'block', type: 'backend-start'},
-            { kind: 'block', type: 'add-to-db'},
-            { kind: 'block', type: 'delete-from-db'},
-            { kind: 'block', type: 'create-db'},
-            { kind: 'block', type: 'read-db'},
+            { kind: 'block', type: 'backend-start' },
+            { kind: 'block', type: 'add-to-db' },
+            { kind: 'block', type: 'delete-from-db' },
+            { kind: 'block', type: 'create-db' },
+            { kind: 'block', type: 'read-db' },
           ],
         },
         {
@@ -1422,10 +1459,19 @@ export default function Home() {
 
   return (
     <>
-    <div className="flex text-black" >
-      <div ref={blocklyRef} className="w-1/2 h-screen" />
-      <iframe className="w-1/2 h-screen" align="right" src="https://www.youtube.com/embed/i0M4ARe9v0Y?si=ZDiC4woohOx-VKfw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
+      <div className="flex text-black">
+        <div ref={blocklyRef} className="w-1/2 h-screen" />
+        <iframe
+          className="w-1/2 h-screen"
+          align="right"
+          src="https://www.youtube.com/embed/i0M4ARe9v0Y?si=ZDiC4woohOx-VKfw"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
     </>
-  )
+  );
 }
