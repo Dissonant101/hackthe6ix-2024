@@ -1020,7 +1020,12 @@ export default function Home() {
                 { kind: 'block', type: 'paragraph' },
                 { kind: 'block', type: 'plaintext' },
                 { kind: 'block', type: 'table' },
-                { kind: 'block', type: 'form' }
+                { kind: 'block', type: 'form' },
+                { kind: 'block', type: 'input_text' },
+                { kind: 'block', type: 'button' },
+                { kind: 'block', type: 'unorderedlist' },
+                { kind: 'block', type: 'orderedlist' },
+                { kind: 'block', type: 'listelement' },
                 
               ],
             },
