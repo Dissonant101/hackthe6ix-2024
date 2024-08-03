@@ -21,6 +21,37 @@ function removeIndentAndTrailingNewline() {
 }
 
 
+HtmlGenerator['frontend-start'] = function(block) {
+  // var statements_content = HtmlGenerator.statementToCode(block, 'content');
+  var code = 'frontend!';
+  return code;
+};
+HtmlGenerator['backend-start'] = function(block) {
+  // var statements_content = HtmlGenerator.statementToCode(block, 'content');
+  var code = 'backend!';
+  return code;
+};
+HtmlGenerator['add-to-db'] = function(block) {
+  // var statements_content = HtmlGenerator.statementToCode(block, 'content');
+  var code = 'db!';
+  return code;
+};
+HtmlGenerator['delete-from-db'] = function(block) {
+  // var statements_content = HtmlGenerator.statementToCode(block, 'content');
+  var code = 'db!';
+  return code;
+};
+HtmlGenerator['create-db'] = function(block) {
+  // var statements_content = HtmlGenerator.statementToCode(block, 'content');
+  var code = 'db!';
+  return code;
+};
+HtmlGenerator['read-db'] = function(block) {
+  // var statements_content = HtmlGenerator.statementToCode(block, 'content');
+  var code = 'db!';
+  return code;
+};
+
 HtmlGenerator['baseframe'] = function(block) {
   var statements_head = HtmlGenerator.statementToCode(block, 'head');
   var statements_body = HtmlGenerator.statementToCode(block, 'body');

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BlocklyWorkspace } from 'react-blockly';
 import * as Blockly from 'blockly/core';
 
@@ -704,6 +704,93 @@ var htmlBlocks = [
     helpUrl: 'http://www.w3schools.com/tags/tag_html.asp',
   },
   {
+    type: "frontend-start",
+    message0: 'frontend-start',
+    tooltip: "",
+    helpUrl: "",
+    nextStatement: 'html',
+    colour: 225
+  },
+  {
+    type: "backend-start",
+    message0: 'backend-start',
+    tooltip: "",
+    helpUrl: "",
+    nextStatement: 'html',
+    colour: 225
+  },
+  {
+    type: "add-to-db",
+    tooltip: "",
+    helpUrl: "",
+    message0: "add-to-db %1",
+    args0: [
+      {
+        "type": "input_value",
+        "name": "data",
+        "align": "CENTRE",
+        "check": "String"
+      }
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 225,
+    inputsInline: true
+  },
+  {
+    type: "delete-from-db",
+    tooltip: "",
+    helpUrl: "",
+    message0: "delete-from-db %1",
+    args0: [
+      {
+        "type": "input_value",
+        "name": "data",
+        "align": "CENTRE",
+        "check": "String"
+      }
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 225,
+    inputsInline: true
+  },
+  {
+    type: "create-db",
+    tooltip: "",
+    helpUrl: "",
+    message0: "create-db %1",
+    args0: [
+      {
+        "type": "input_value",
+        "name": "data",
+        "align": "CENTRE",
+        "check": "String"
+      }
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 225,
+    inputsInline: true
+  },
+  {
+    type: "read-db",
+    tooltip: "",
+    helpUrl: "",
+    message0: "read-db %1",
+    args0: [
+      {
+        "type": "input_value",
+        "name": "data",
+        "align": "CENTRE",
+        "check": "String"
+      }
+    ],
+    output: null,
+    colour: 225,
+    inputsInline: true
+  },
+  {
     type: 'table',
     message0: 'table %1 %2',
     args0: [
@@ -908,8 +995,13 @@ Blockly.defineBlocksWithJsonArray(htmlBlocks);
 export default function Home() {
   const [xml, setXml] = useState();
 
+  useEffect(() => {
+    console.log(xml)
+  }, [xml])
+  
   return (
     <div className="w-screen h-screen">
+      
       <BlocklyWorkspace
         className="w-full h-full text-black"
         toolboxConfiguration={{
@@ -920,8 +1012,16 @@ export default function Home() {
               name: 'HTML',
               colour: 230,
               contents: [
+                { kind: 'block', type: 'frontend-start'},
+                { kind: 'block', type: 'html' },
+                { kind: 'block', type: 'body' },
+                { kind: 'block', type: 'head' },
+                { kind: 'block', type: 'title' },
+                { kind: 'block', type: 'paragraph' },
+                { kind: 'block', type: 'plaintext' },
                 { kind: 'block', type: 'table' },
-                { kind: 'block', type: 'form' },
+                { kind: 'block', type: 'form' }
+                
               ],
             },
             {
@@ -929,34 +1029,11 @@ export default function Home() {
               name: 'Backend',
               colour: 120,
               contents: [
-                {
-                  kind: 'block',
-                  type: 'text',
-                },
-                {
-                  kind: 'block',
-                  type: 'logic_compare',
-                },
-                {
-                  kind: 'block',
-                  type: 'logic_operation',
-                },
-                {
-                  kind: 'block',
-                  type: 'logic_negate',
-                },
-                {
-                  kind: 'block',
-                  type: 'logic_boolean',
-                },
-                {
-                  kind: 'block',
-                  type: 'logic_null',
-                },
-                {
-                  kind: 'block',
-                  type: 'logic_ternary',
-                },
+                { kind: 'block', type: 'backend-start'},
+                { kind: 'block', type: 'add-to-db'},
+                { kind: 'block', type: 'delete-from-db'},
+                { kind: 'block', type: 'create-db'},
+                { kind: 'block', type: 'read-db'}
               ],
             },
           ],
@@ -964,6 +1041,9 @@ export default function Home() {
         initialXml={xml}
         onXmlChange={setXml}
       />
+      
     </div>
   );
 }
+
+
