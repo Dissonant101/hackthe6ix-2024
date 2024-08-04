@@ -1463,7 +1463,7 @@ export default function Home() {
   const handleButtonClick = () => {
     setIsRendering(!isRendering);
   };
-
+  
   return (
     <>
       <div className="flex w-screen h-screen text-black">
@@ -1498,6 +1498,9 @@ export default function Home() {
             allowFullScreen
           ></iframe>
         )}
+        <div className="absolute bottom-0 left-0 m-4">
+          <img src="https://cdn.discordapp.com/attachments/1266479640747315285/1269534627278753842/my_little_pony__pinkie_pie_2d_by_joshuat1306_dd34mw8-fullview.png?ex=66b069c1&is=66af1841&hm=ec15ce29d0861e6e0c0b1cfa021c78e572653bc494267bb74c568a9bd173f0bd&" alt="Description of image" className="w-16 h-16"/>
+        </div>
       </div>
     </>
   );
