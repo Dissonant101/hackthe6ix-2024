@@ -45,7 +45,7 @@ export default function Home() {
         </div>
         {isRendering ? (
           <div
-            className="flex-1 h-screen"
+            className="flex-1 h-screen text-white"
             dangerouslySetInnerHTML={{
               __html: generatedHtml,
             }}
