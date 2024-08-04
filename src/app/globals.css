@@ -32,6 +32,10 @@ body {
   }
 }
 
-svg[display="none"] {
+svg[display='none'] {
   display: none;
+}
+
+.blocklyHtmlInput {
+  color: black;
 }

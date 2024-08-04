@@ -1005,7 +1005,7 @@ export default function Home() {
         {
           kind: 'category',
           name: 'HTML',
-          colour: 230,
+          colour: '230',
           contents: [
             { kind: 'block', type: 'baseframe' },
             { kind: 'block', type: 'html' },
@@ -1468,7 +1468,7 @@ export default function Home() {
     <>
       <div className="flex w-screen h-screen text-black">
         <div
-          className="relative z-0 flex-1 w-full h-screen"
+          className="relative z-0 flex-1 w-full h-screen text-black"
           ref={blocklyRef}
         ></div>
         <div className="absolute z-20 transform -translate-x-1/2 bottom-4 left-1/4">
@@ -1481,7 +1481,7 @@ export default function Home() {
         </div>
         {isRendering ? (
           <div
-            className="flex-1 h-screen text-white"
+            className="flex-1 h-screen"
             dangerouslySetInnerHTML={{
               __html: generatedHtml,
             }}
