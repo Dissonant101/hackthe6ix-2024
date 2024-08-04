@@ -1467,7 +1467,12 @@ export default function Home() {
   return (
     <>
       <div className="flex text-black">
-        <div ref={blocklyRef} className="flex-auto min-h-full" />
+        <div className="relative w-1/2 h-screen z-0" ref={blocklyRef}></div>
+        <div className="absolute bottom-4 left-1/4 transform -translate-x-1/2 z-20">
+          <button onClick={handleButtonClick} className="bg-gray-500 text-black py-2 px-4 rounded">
+            Toggle Rendering
+          </button>
+        </div>
         {isRendering ? (
           <div
             className="flex-1 w-screen h-screen"
@@ -1488,7 +1493,6 @@ export default function Home() {
           ></iframe>
         )}
       </div>
-      <button onClick={handleButtonClick}>Toggle Rendering</button>
     </>
   );
 }
