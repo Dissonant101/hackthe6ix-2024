@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useBlocklyWorkspace } from 'react-blockly';
 import * as Blockly from 'blockly/core';
 import { HtmlGenerator } from '../../blockly/html_generators';
@@ -995,6 +995,7 @@ Blockly.defineBlocksWithJsonArray(htmlBlocks);
 
 export default function Home() {
   const blocklyRef = useRef(null);
+  const [generatedHtml, setGeneratedHtml] = useState('');
   const { workspace, xml } = useBlocklyWorkspace({
     ref: blocklyRef,
     toolboxConfiguration: {
@@ -1454,24 +1455,30 @@ export default function Home() {
     onWorkspaceChange: (workspace) => {
       const code = HtmlGenerator.workspaceToCode(workspace);
       console.log(code);
+      setGeneratedHtml(code);
     },
   });
-
+  
   return (
     <>
       <div className="flex text-black">
         <div ref={blocklyRef} className="w-1/2 h-screen" />
-        <iframe
-          className="w-1/2 h-screen"
-          align="right"
-          src="https://www.youtube.com/embed/i0M4ARe9v0Y?si=ZDiC4woohOx-VKfw"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
+        {generatedHtml ? (
+          <div className="w-1/2 h-screen text-white" dangerouslySetInnerHTML={{ __html: generatedHtml }} />
+        ) : (
+          <iframe
+            className="w-1/2 h-screen"
+            align="right"
+            src="https://www.youtube.com/embed/i0M4ARe9v0Y?si=ZDiC4woohOx-VKfw"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        )}
       </div>
+      <button onClick={() => (blocklyRef.current.workspace)}>Generate HTML</button>
     </>
   );
 }
