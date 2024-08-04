@@ -1466,25 +1466,31 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex text-black">
-        <div className="relative w-1/2 h-screen z-0" ref={blocklyRef}></div>
-        <div className="absolute bottom-4 left-1/4 transform -translate-x-1/2 z-20">
-          <button onClick={handleButtonClick} className="bg-gray-500 text-black py-2 px-4 rounded">
+      <div className="flex w-screen h-screen text-black">
+        <div
+          className="relative z-0 flex-1 w-full h-screen"
+          ref={blocklyRef}
+        ></div>
+        <div className="absolute z-20 transform -translate-x-1/2 bottom-4 left-1/4">
+          <button
+            onClick={handleButtonClick}
+            className="px-4 py-2 text-black bg-gray-500 rounded"
+          >
             Toggle Rendering
           </button>
         </div>
         {isRendering ? (
           <div
-            className="flex-1 text-white w-screen h-screen"
+            className="flex-1 h-screen text-white"
             dangerouslySetInnerHTML={{
               __html: generatedHtml,
             }}
           />
         ) : (
           <iframe
-            className="w-1/2 h-screen"
+            className="flex-1 h-screen"
             align="right"
-            src="https://www.youtube.com/embed/dvjy6V4vLlI?si=CnmoG0gR4KFy8Ers&amp;controls=0&autoplay=1&mute=1" 
+            src="https://www.youtube.com/embed/dvjy6V4vLlI?si=CnmoG0gR4KFy8Ers&amp;controls=0&autoplay=1&mute=1"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
