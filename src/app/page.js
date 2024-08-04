@@ -3,7 +3,8 @@
 import { useRef, useEffect, useState } from 'react';
 import { useBlocklyWorkspace } from 'react-blockly';
 import * as Blockly from 'blockly/core';
-import { HtmlGenerator } from '../../blockly/html_generators';
+import { htmlGenerator } from '../../blockly/CodeGenerators';
+import { javascriptGenerator } from 'blockly/javascript';
 import { blocks } from '../../blockly/BlockDefinitions';
 import { toolbox } from '../../blockly/ToolboxConfig';
 
@@ -18,8 +19,7 @@ export default function Home() {
     toolboxConfiguration: toolbox,
     initialXml: "<xml xmlns='http://www.w3.org/1999/xhtml'></xml>",
     onWorkspaceChange: (workspace) => {
-      const code = HtmlGenerator.workspaceToCode(workspace);
-      console.log(code);
+      const code = htmlGenerator.workspaceToCode(workspace);
       setGeneratedHtml(code);
     },
   });
@@ -27,7 +27,7 @@ export default function Home() {
   const handleButtonClick = () => {
     setIsRendering(!isRendering);
   };
-  
+
   return (
     <>
       <div className="flex w-screen h-screen text-black">
@@ -38,7 +38,7 @@ export default function Home() {
         <div className="absolute z-20 transform -translate-x-1/2 bottom-4 left-1/4">
           <button
             onClick={handleButtonClick}
-            className="px-4 py-2 text-black bg-emerald-500 rounded"
+            className="px-4 py-2 text-black rounded bg-emerald-500"
           >
             Toggle Rendering
           </button>
@@ -63,7 +63,11 @@ export default function Home() {
           ></iframe>
         )}
         <div className="absolute bottom-0 left-0 m-4">
-          <img src="https://cdn.discordapp.com/attachments/1266479640747315285/1269534627278753842/my_little_pony__pinkie_pie_2d_by_joshuat1306_dd34mw8-fullview.png?ex=66b069c1&is=66af1841&hm=ec15ce29d0861e6e0c0b1cfa021c78e572653bc494267bb74c568a9bd173f0bd&" alt="Description of image" className="w-16 h-16"/>
+          <img
+            src="https://cdn.discordapp.com/attachments/1266479640747315285/1269534627278753842/my_little_pony__pinkie_pie_2d_by_joshuat1306_dd34mw8-fullview.png?ex=66b069c1&is=66af1841&hm=ec15ce29d0861e6e0c0b1cfa021c78e572653bc494267bb74c568a9bd173f0bd&"
+            alt="Description of image"
+            className="w-16 h-16"
+          />
         </div>
       </div>
     </>
