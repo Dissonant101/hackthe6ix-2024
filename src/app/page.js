@@ -996,6 +996,7 @@ Blockly.defineBlocksWithJsonArray(htmlBlocks);
 export default function Home() {
   const blocklyRef = useRef(null);
   const [generatedHtml, setGeneratedHtml] = useState('');
+  const [isRendering , setIsRendering] = useState(false);
   const { workspace, xml } = useBlocklyWorkspace({
     ref: blocklyRef,
     toolboxConfiguration: {
@@ -1458,14 +1459,18 @@ export default function Home() {
       setGeneratedHtml(code);
     },
   });
+
+  const handleButtonClick = () => {
+    setIsRendering(!isRendering);
+  };
   
   return (
     <>
       <div className="flex text-black">
         <div ref={blocklyRef} className="w-1/2 h-screen" />
-        {generatedHtml ? (
-          <div className="w-1/2 h-screen text-white" dangerouslySetInnerHTML={{ __html: generatedHtml }} />
-        ) : (
+        {isRendering ? (
+            <div className="w-1/2 h-screen text-white" dangerouslySetInnerHTML={{ __html: generatedHtml }} />  
+          ) : 
           <iframe
             className="w-1/2 h-screen"
             align="right"
@@ -1476,9 +1481,9 @@ export default function Home() {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
-        )}
+        }
       </div>
-      <button onClick={() => (blocklyRef.current.workspace)}>Generate HTML</button>
+      <button onClick={handleButtonClick}>Toggle Rendering</button>
     </>
   );
 }
