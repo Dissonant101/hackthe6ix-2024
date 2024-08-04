@@ -39,3 +39,11 @@ svg[display='none'] {
 .blocklyHtmlInput {
   color: black;
 }
+
+.blocklySvg {
+  background-color: 	#D8EFD3 !important;
+}
+
+.blocklyToolboxDiv {
+  background-color: #95D2B3 !important;
+}

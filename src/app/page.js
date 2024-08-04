@@ -38,7 +38,7 @@ export default function Home() {
         <div className="absolute z-20 transform -translate-x-1/2 bottom-4 left-1/4">
           <button
             onClick={handleButtonClick}
-            className="px-4 py-2 text-black bg-gray-500 rounded"
+            className="px-4 py-2 text-black bg-emerald-500 rounded"
           >
             Toggle Rendering
           </button>
