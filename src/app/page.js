@@ -12,16 +12,16 @@ Blockly.defineBlocksWithJsonArray(blocks);
 const BlocklyDiv = ({
   setXml,
   initialXml = "<xml xmlns='http://www.w3.org/1999/xhtml'></xml>",
+  setGeneratedHtml, // add this prop
 }) => {
   const blocklyRef = useRef(null);
-  const [generatedHtml, setGeneratedHtml] = useState('');
   const { workspace, xml } = useBlocklyWorkspace({
     ref: blocklyRef,
     toolboxConfiguration: toolbox,
     initialXml,
     onWorkspaceChange: (workspace) => {
       const code = htmlGenerator.workspaceToCode(workspace);
-      setGeneratedHtml(code);
+      setGeneratedHtml(code); // set generated HTML
     },
   });
 
@@ -46,6 +46,7 @@ export default function Home() {
   );
   const [xml, setXml] = useState(initialXml);
   const [forceRemount, setForceRemount] = useState(false);
+  const [generatedHtml, setGeneratedHtml] = useState(''); // add state for generated HTML
 
   const handleButtonClick = () => {
     setIsRendering(!isRendering);
@@ -82,7 +83,11 @@ export default function Home() {
     <>
       <div className="flex w-screen h-screen text-black">
         {!forceRemount && (
-          <BlocklyDiv initialXml={initialXml} setXml={setXml} />
+          <BlocklyDiv 
+            initialXml={initialXml} 
+            setXml={setXml} 
+            setGeneratedHtml={setGeneratedHtml} // pass the setter as prop
+          />
         )}
         <div className="absolute z-20 flex space-x-1 transform -translate-x-1/2 bottom-4 left-1/4">
           <button
