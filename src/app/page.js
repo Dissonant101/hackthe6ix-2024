@@ -1,46 +1,114 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useBlocklyWorkspace } from 'react-blockly';
 import * as Blockly from 'blockly/core';
 import { htmlGenerator } from '../../blockly/CodeGenerators';
-import { javascriptGenerator } from 'blockly/javascript';
 import { blocks } from '../../blockly/BlockDefinitions';
 import { toolbox } from '../../blockly/ToolboxConfig';
 
 Blockly.defineBlocksWithJsonArray(blocks);
 
-export default function Home() {
+const BlocklyDiv = ({
+  setXml,
+  initialXml = "<xml xmlns='http://www.w3.org/1999/xhtml'></xml>",
+}) => {
   const blocklyRef = useRef(null);
   const [generatedHtml, setGeneratedHtml] = useState('');
-  const [isRendering, setIsRendering] = useState(false);
   const { workspace, xml } = useBlocklyWorkspace({
     ref: blocklyRef,
     toolboxConfiguration: toolbox,
-    initialXml: "<xml xmlns='http://www.w3.org/1999/xhtml'></xml>",
+    initialXml,
     onWorkspaceChange: (workspace) => {
       const code = htmlGenerator.workspaceToCode(workspace);
       setGeneratedHtml(code);
     },
   });
 
+  useEffect(() => {
+    setXml(xml);
+  }, [xml]);
+
+  return (
+    <div
+      className="relative z-0 flex-1 w-full h-screen text-black"
+      ref={blocklyRef}
+    ></div>
+  );
+};
+
+export default function Home() {
+  const fileInputRef = useRef();
+
+  const [isRendering, setIsRendering] = useState(false);
+  const [initialXml, setInitialXml] = useState(
+    "<xml xmlns='http://www.w3.org/1999/xhtml'></xml>",
+  );
+  const [xml, setXml] = useState(initialXml);
+  const [forceRemount, setForceRemount] = useState(false);
+
   const handleButtonClick = () => {
     setIsRendering(!isRendering);
+  };
+
+  const handleLoad = (e) => {
+    console.log('Loading workspace');
+
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onloadend = function (e) {
+      setForceRemount(true);
+      setXml(reader.result);
+      setInitialXml(reader.result);
+    };
+    reader.readAsText(file);
+  };
+  useEffect(() => {
+    if (forceRemount) setForceRemount(false);
+  }, [forceRemount]);
+
+  const handleSave = () => {
+    console.log('Saving workspace');
+    window.open(
+      'data:application/octet-stream,' + encodeURIComponent(xml),
+      'blockly.xml',
+    );
   };
 
   return (
     <>
       <div className="flex w-screen h-screen text-black">
-        <div
-          className="relative z-0 flex-1 w-full h-screen text-black"
-          ref={blocklyRef}
-        ></div>
-        <div className="absolute z-20 transform -translate-x-1/2 bottom-4 left-1/4">
+        {!forceRemount && (
+          <BlocklyDiv initialXml={initialXml} setXml={setXml} />
+        )}
+        <div className="absolute z-20 flex space-x-1 transform -translate-x-1/2 bottom-4 left-1/4">
           <button
             onClick={handleButtonClick}
             className="px-4 py-2 text-black rounded bg-emerald-500"
           >
             Toggle Rendering
+          </button>
+          <button
+            onClick={() => fileInputRef.current.click()}
+            className="px-4 py-2 text-black rounded bg-emerald-500"
+          >
+            Load
+            <input
+              type="file"
+              onChange={handleLoad}
+              ref={fileInputRef}
+              multiple={false}
+              hidden={true}
+            />
+          </button>
+          <button
+            onClick={handleSave}
+            className="px-4 py-2 text-black rounded bg-emerald-500"
+          >
+            Save
           </button>
         </div>
         {isRendering ? (
